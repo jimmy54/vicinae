@@ -1,9 +1,13 @@
 import * as esbuild from "esbuild";
 import { mkdirSync, rmSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export const build = async () => {
-	const outDir = join(import.meta.dirname, "..", "dist");
+	const outDir = join(__dirname, "..", "dist");
 	const outFile = join(outDir, "runtime.js");
 
 	rmSync(outDir, { recursive: true, force: true });
